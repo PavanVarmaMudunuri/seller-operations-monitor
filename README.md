@@ -4,37 +4,28 @@ A reproducible marketplace operations monitoring platform that tracks seller ser
 
 ---
 
-## Visual Dashboard Overview
+## Visual Dashboard Overview (Full Production Scale)
 
-The platform includes an interactive Streamlit dashboard providing real-time visibility into operational health, seller performance bands, payout reconciliation discrepancies, and exception distributions.
+The platform includes an interactive Streamlit operations monitoring dashboard providing complete visibility into operational health, merchant service tiers, financial reconciliation, and injected anomaly distributions.
 
-### 1. Operations Overview & Seller Service Levels
-Displays high-level operational metrics (total active sellers, order volume, gross merchandise value, ground-truth anomalies) alongside detailed seller performance scorecards.
+### 1. Operations Overview & Top KPIs (Full 2,000 Sellers Scale)
+Displays macro-level operational metrics across the full production scale: **2,000 sellers**, **153,077 order lines**, **₹385,141,720 GMV**, and **500 ground-truth exceptions**.
 
-![Seller Service Levels](docs/screenshots/01_seller_service_levels.png)
-
----
-
-### 2. Payout Settlement & Reconciliation
-Tracks gross order amounts, commission deductions, dispute withholdings, risk reserves, and net seller disbursements, surfacing reconciliation variances.
-
-![Payout Reconciliation](docs/screenshots/02_payout_reconciliation.png)
+![Operations Overview Full Scale](docs/screenshots/01_operations_overview_full_scale.png)
 
 ---
 
-### 3. Deliberate Exception Classes
-Displays known, injected anomaly cases categorized by severity and issue type for objective operational auditing.
+### 2. Exception Classes & Service Score Distribution
+Displays the 5 injected anomaly classes (exactly 100 cases each) with operational severity alongside the live merchant distribution across performance health bands.
 
-![Exception Classes](docs/screenshots/03_exception_classes.png)
+![Exception Classes and Service Score Distribution](docs/screenshots/02_exception_classes_and_service_distribution.png)
 
 ---
 
-### 4. Exception Distribution & Service Score Breakdown
-Visual breakdown of detected exceptions across categories and seller distribution across service bands (`EXCELLENT`, `GOOD`, `WATCH`, `AT_RISK`).
+### 3. Balanced Exception Distribution
+Verification of the balanced 500 ground-truth anomalies across all 5 required business exception scenarios (100 cases per category).
 
-| Exception Distribution | Service Score Distribution |
-| :---: | :---: |
-| ![Exception Distribution](docs/screenshots/04_exception_distribution.png) | ![Service Score Distribution](docs/screenshots/05_service_score_distribution.png) |
+![Exception Distribution Chart](docs/screenshots/03_exception_distribution_chart.png)
 
 ---
 
