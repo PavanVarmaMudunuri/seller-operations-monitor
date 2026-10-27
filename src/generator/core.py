@@ -97,9 +97,10 @@ def generate_all(cfg):
     ])
 
     # Fulfillments derived from lines
+    order_date_map=dict(zip(orders_df.order_id,orders_df.order_date))
     fulfill=[]
-    for _,r in lines_df.iterrows():
-        od=pd.Timestamp(orders_df.loc[orders_df.order_id==r.order_id,"order_date"].iloc[0]).date()
+    for r in lines:
+        od=pd.Timestamp(order_date_map[r[1]]).date()
         promised_ship=od+timedelta(days=int(rng.integers(1,4)))
         actual_ship=promised_ship+timedelta(days=int(rng.choice([0,0,0,1,2,3],p=[.50,.15,.1,.1,.1,.05])))
         promised_delivery=actual_ship+timedelta(days=int(rng.integers(2,6)))
@@ -109,8 +110,8 @@ def generate_all(cfg):
         ret="RETURNED" if delivered and rng.random()<.06 else "NONE"
         delay=(actual_ship-promised_ship).days
         sla="ON_TIME" if delay<=0 else ("LATE" if delay<=2 else "SEVERELY_LATE")
-        fid=f"FUL-{r.order_line_id}"
-        fulfill.append([fid,r.order_line_id,r.seller_id,status,date_str(promised_ship),
+        fid=f"FUL-{r[0]}"
+        fulfill.append([fid,r[0],r[3],status,date_str(promised_ship),
                         date_str(actual_ship),date_str(promised_delivery),
                         date_str(actual_delivery) if actual_delivery else None,
                         random.choice(CARRIERS),f"TRK-{rng.integers(10**10,10**11-1)}",ret,sla])
@@ -122,9 +123,10 @@ def generate_all(cfg):
 
     # Reviews only for delivered lines, with seller rating influenced by SLA
     reviews=[]
+    line_order_map={r[0]:r[1] for r in lines}
     delivered_lines=fulfill_df[fulfill_df.fulfillment_status=="DELIVERED"]
-    for i,(_,f) in enumerate(delivered_lines.sample(frac=.55,random_state=seed).iterrows(),start=1):
-        oid=lines_df.loc[lines_df.order_line_id==f.order_line_id,"order_id"].iloc[0]
+    for i,f in enumerate(delivered_lines.sample(frac=.55,random_state=seed).itertuples(),start=1):
+        oid=line_order_map[f.order_line_id]
         rating=int(np.clip(round(rng.normal(4.1 if f.sla_status=="ON_TIME" else 3.3,.7)),1,5))
         reviews.append([f"REV-{i:08d}",oid,f.seller_id,rating,date_str(base_date)])
     reviews_df=pd.DataFrame(reviews,columns=["review_id","order_id","seller_id","rating","review_date"])
