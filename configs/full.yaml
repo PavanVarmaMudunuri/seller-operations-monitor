@@ -1,0 +1,28 @@
+seed: 20261022
+volume:
+  sellers: 2000
+  listings: 20000
+  customers: 25000
+  orders: 100000
+  disputes: 10000
+anomalies:
+  payout_before_hold: 100
+  duplicate_commission: 100
+  suspended_listing: 100
+  dispute_not_deducted: 100
+  payout_mismatch: 100
+business:
+  default_currency: INR
+  payout_hold_days: 7
+  reserve_rate_new: 0.15
+  reserve_rate_established: 0.05
+  reserve_rate_high_risk: 0.25
+  commission_default: 0.10
+  commission_premium: 0.07
+  commission_by_category:
+    Electronics: 0.08
+    Fashion: 0.12
+    Home: 0.10
+    Beauty: 0.11
+    Grocery: 0.06
+    Sports: 0.09
