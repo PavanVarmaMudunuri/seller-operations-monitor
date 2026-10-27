@@ -1,0 +1,11 @@
+.venv/
+venv/
+__pycache__/
+*.pyc
+.pytest_cache/
+data/exports/
+reports/*.csv
+reports/*.json
+ground_truth/ground_truth.csv
+*.env
+.env
